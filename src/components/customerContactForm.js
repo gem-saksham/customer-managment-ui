@@ -33,6 +33,7 @@ const CustomerContactForm = ({onClose}) => {
     const [roles, setRoles] = useState([]); 
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchRoles = async () => {
@@ -54,6 +55,7 @@ const CustomerContactForm = ({onClose}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true); // Set loading to true
         try {
              // Use the roleInput if 'Others' is selected, otherwise use the selected role
         const finalRole = contactData.role === 'Others' ? contactData.roleInput : contactData.role;
@@ -68,6 +70,8 @@ const CustomerContactForm = ({onClose}) => {
         } catch (error) {
             setError('Failed to save customer contact details');
             setSuccess(null);
+        } finally {
+            setLoading(false); // Reset loading state
         }
     };
 
@@ -318,7 +322,15 @@ const CustomerContactForm = ({onClose}) => {
                 </div>
                 
                 {/* Submit and Refresh buttons */}
-                <button type="submit" className="submit-btn">Save Contact</button>
+                <button type="submit" className="submit-btn" disabled={loading}>
+                {loading ? (
+                    <span>
+                        <i className="fa fa-spinner fa-spin"></i> Processing...
+                    </span>
+                ) : (
+                    "Save Contact"
+                )}
+               </button>
                 <button type="button" className="submit-btn" onClick={handleRefresh} style={{ marginLeft: '10px' }}>
                     Refresh to fill another contact
                 </button>

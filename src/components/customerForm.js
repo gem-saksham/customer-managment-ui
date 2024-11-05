@@ -29,6 +29,7 @@ const CustomerForm = ({onClose}) => {
   
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();  // For navigating to dashboard
   
     const handleInputChange = (e) => {
@@ -38,6 +39,7 @@ const CustomerForm = ({onClose}) => {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
+      setLoading(true); 
       try {
         const response = await addCustomer(customerData);  // Send data to the API
         const createdCustomerId = response.data.object.customerId;  // Extract customerId from response
@@ -51,7 +53,9 @@ const CustomerForm = ({onClose}) => {
       } catch (error) {
         setError('Failed to add customer');
         setSuccess(null);
-      }
+      } finally {
+        setLoading(false); // Reset loading state
+    }
     };
 
 
@@ -149,7 +153,15 @@ const CustomerForm = ({onClose}) => {
         </div>
 
         {/* Submit Button */}
-        <button type="submit" className="submit-btn">Save Customer</button>
+       <button type="submit" className="submit-btn" disabled={loading}>
+                {loading ? (
+                    <span>
+                        <i className="fa fa-spinner fa-spin"></i> Processing...
+                    </span>
+                ) : (
+                    "Save Customer"
+                )}
+               </button>
 
         {/* Success or Error Message Display */}
         {success && <p className="success-message">{success}</p>}

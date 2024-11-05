@@ -18,6 +18,7 @@ const CustomerMarketForm = ({onClose}) => {
   const [subcategories, setSubcategories] = useState([]); // State for subcategories
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // Fetch markets when the component mounts
   useEffect(() => {
@@ -62,6 +63,7 @@ const CustomerMarketForm = ({onClose}) => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await addCustomerMarket(marketData); // Call the service method
       setSuccess('Customer market details added successfully');
@@ -74,7 +76,9 @@ const CustomerMarketForm = ({onClose}) => {
       setError('Failed to add customer market details');
       setSuccess(null);
       console.error("Error adding customer market:", error); // Debug log for error
-    }
+    } finally {
+      setLoading(false); // Reset loading state
+  }
   };
 
   // Handle refreshing the form
@@ -134,7 +138,16 @@ const CustomerMarketForm = ({onClose}) => {
           </select>
         </div>
 
-        <button type="submit" className="submit-btn">Save Market</button>
+        {/* Submit Button */}
+       <button type="submit" className="submit-btn" disabled={loading}>
+                {loading ? (
+                    <span>
+                        <i className="fa fa-spinner fa-spin"></i> Processing...
+                    </span>
+                ) : (
+                    "Save Market"
+                )}
+               </button>
 
         {/* New buttons for refreshing and going back */}
         <button type="button" className="submit-btn" onClick={handleRefresh} style={{ marginLeft: '10px' }}>

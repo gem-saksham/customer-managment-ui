@@ -7,6 +7,7 @@ const CustomerContactUpdateForm = ({ contact, onClose, onUpdate }) => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [roles, setRoles] = useState([]); 
+  const [loading, setLoading] = useState(false);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setContactData({ ...contactData, [name]: value }); // Update the respective field
@@ -27,6 +28,7 @@ const CustomerContactUpdateForm = ({ contact, onClose, onUpdate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true
     try {
       await updateCustomerContact(contact.customerContactID, contactData); // Call the update API
       setSuccess('Contact updated successfully');
@@ -36,7 +38,9 @@ const CustomerContactUpdateForm = ({ contact, onClose, onUpdate }) => {
     } catch (error) {
       setError('Failed to update contact');
       setSuccess(null);
-    }
+    }  finally {
+      setLoading(false); // Reset loading state
+  }
   };
 
   return (
@@ -152,7 +156,15 @@ const CustomerContactUpdateForm = ({ contact, onClose, onUpdate }) => {
           <input type="text" name="contactSubjectKeyword" value={contactData.contactSubjectKeyword} onChange={handleInputChange} />
         </div>
 
-        <button type="submit" className="submit-btn">Update Contact</button>
+        <button type="submit" className="submit-btn" disabled={loading}>
+                {loading ? (
+                    <span>
+                        <i className="fa fa-spinner fa-spin"></i> Processing...
+                    </span>
+                ) : (
+                    "Update Contact"
+                )}
+               </button>
         {success && <p className="success-message">{success}</p>}
         {error && <p className="error-message">{error}</p>}
       </form>

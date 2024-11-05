@@ -18,6 +18,7 @@ const CustomerSubjectForm = ({onClose}) => {
   const [subCategories, setSubCategories] = useState([]);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // Fetch subjects on component mount
   useEffect(() => {
@@ -54,7 +55,7 @@ const CustomerSubjectForm = ({onClose}) => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    setLoading(true);
     try {
       await addCustomerSubject(subjectData);      // Call the service method to submit data
       setSuccess('Customer subject details added successfully');
@@ -65,6 +66,8 @@ const CustomerSubjectForm = ({onClose}) => {
     } catch (error) {
       setError('Failed to add customer subject details');
       setSuccess(null);
+    } finally {
+      setLoading(false); // Reset loading state
     }
   };
 
@@ -135,7 +138,16 @@ const CustomerSubjectForm = ({onClose}) => {
           )}
         </div>
 
-        <button type="submit" className="submit-btn">Save Subject</button>
+        {/* Submit Button */}
+        <button type="submit" className="submit-btn" disabled={loading}>
+                {loading ? (
+                    <span>
+                        <i className="fa fa-spinner fa-spin"></i> Processing...
+                    </span>
+                ) : (
+                    "Save Subject"
+                )}
+               </button>
 
         {/* New buttons for refreshing and going back */}
         <button type="button" className="submit-btn" onClick={handleRefresh} style={{ marginLeft: '10px' }}>

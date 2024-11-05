@@ -9,6 +9,7 @@ const CustomerUpdateForm = ({ customer, onClose, onUpdate  }) => {  // Accept cu
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -17,6 +18,7 @@ const CustomerUpdateForm = ({ customer, onClose, onUpdate  }) => {  // Accept cu
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); 
     try {
       // Use the customerId directly from the customer object
       const customerId = customer.customerId; 
@@ -31,7 +33,9 @@ const CustomerUpdateForm = ({ customer, onClose, onUpdate  }) => {  // Accept cu
     } catch (error) {
       setError('Failed to update customer');
       setSuccess(null);
-    }
+    } finally {
+      setLoading(false); // Reset loading state
+  }
   };
 
   return (
@@ -127,7 +131,15 @@ const CustomerUpdateForm = ({ customer, onClose, onUpdate  }) => {  // Accept cu
         </div>
 
         {/* Submit Button */}
-        <button type="submit" className="submit-btn">Update Customer</button>
+        <button type="submit" className="submit-btn" disabled={loading}>
+                {loading ? (
+                    <span>
+                        <i className="fa fa-spinner fa-spin"></i> Processing...
+                    </span>
+                ) : (
+                    "Update Customer"
+                )}
+               </button>
 
         {/* Success or Error Message Display */}
         {success && <p className="success-message">{success}</p>}

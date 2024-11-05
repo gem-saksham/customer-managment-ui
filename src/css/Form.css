@@ -21,6 +21,7 @@ body {
     margin-bottom: 20px; /* Space below the title */
 }
 
+
 .customer-form {
     display: flex;
     flex-direction: column; /* Stack items vertically */
@@ -66,3 +67,8 @@ input {
     color: red; /* Error message color */
     text-align: center; /* Center the message */
 }
+
+.fa-spinner {
+    margin-right: 5px; /* Space between spinner and text */
+}
+
