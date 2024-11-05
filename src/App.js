@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import CustomerForm from './components/customerForm';
+import CustomerContactForm from './components/customerContactForm';
+import CustomerDashboard from './components/customerDashboard';
+import CustomerMarketForm from './components/customerMarketForm';
+import CustomerSubjectForm from './components/customerSubjectForm'; 
+import CustomerLandingPage from './components/customerLandingPage'; // New landing page component
+import CustomerUpdateForm from './components/customerUpdateForm';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<CustomerLandingPage />} /> {/* New route for landing page */}
+        <Route path="/add-customer" element={<CustomerForm />} />
+        <Route path="/update-customer/:customerId" element={<CustomerUpdateForm />} />
+        <Route path="/dashboard/:customerId" element={<CustomerDashboard />} />
+        <Route path="/add-contact/:customerId" element={<CustomerContactForm />} />
+        <Route path="/add-market/:customerId" element={<CustomerMarketForm />} />
+        <Route path="/add-subject/:customerId" element={<CustomerSubjectForm />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

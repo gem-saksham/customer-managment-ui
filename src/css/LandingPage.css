@@ -1,0 +1,107 @@
+.landing-page {
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for the landing page */
+}
+
+.landing-page h1 {
+    text-align: center; /* Center the text */
+    margin-bottom: 20px; /* Add some space below the heading */
+}
+
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.customer-table {
+    background-color: #fff; /* Table background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow: hidden; /* Prevent overflow for rounded corners */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Border for rows */
+}
+
+tr:hover {
+    background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center; /* Center pagination controls */
+}
+
+.pagination button {
+    margin: 0 5px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #e7e7e7; /* Default button background */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.pagination button:hover {
+    background-color: #d0d0d0; /* Change background on hover */
+}
+
+.pagination button.active {
+    background-color: #007bff; /* Active page button color */
+    color: white;
+}
+
+.update-button {
+    color: #007bff; /* Update link color */
+    text-decoration: none; /* Remove underline from link */
+}
+
+.update-button:hover {
+    text-decoration: underline; /* Underline on hover for better indication */
+}
+
+.add-customer-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff; /* Bootstrap primary color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .add-customer-button:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+  }
+
+  .success-message {
+    position: fixed; /* Fixed position */
+    top: 20px; /* Distance from the top */
+    right: 20px; /* Distance from the right */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding */
+    border-radius: 5px; /* Rounded corners */
+    z-index: 1000; /* Ensure it is above other elements */
+    transition: opacity 0.5s ease; /* Smooth transition */
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .search-bar {
+        width: 100%;
+    }
+
+    th, td {
+        padding: 8px; /* Reduce padding for smaller screens */
+    }
+}
