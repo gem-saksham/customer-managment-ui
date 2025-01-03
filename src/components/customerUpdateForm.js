@@ -45,17 +45,17 @@ const CustomerUpdateForm = ({ customer, onClose, onUpdate  }) => {  // Accept cu
         {/* Customer Details Section */}
         <div className="form-group">
           <label>Customer Name</label>
-          <input type="text" name="customerName" value={customerData.customerName} onChange={handleInputChange} required />
+          <input type="text" name="customerName" value={customerData.customerName} onChange={handleInputChange}  />
         </div>
         <div className="form-group">
           <label>Customer Abbreviation</label>
-          <input type="text" name="customerAbbreviation" value={customerData.customerAbbreviation} onChange={handleInputChange} required />
+          <input type="text" name="customerAbbreviation" value={customerData.customerAbbreviation} onChange={handleInputChange} />
         </div>
         
         {/* Address Fields */}
         <div className="form-group">
           <label>Address One</label>
-          <input type="text" name="addressOne" value={customerData.addressOne} onChange={handleInputChange} required />
+          <input type="text" name="addressOne" value={customerData.addressOne} onChange={handleInputChange}  />
         </div>
         <div className="form-group">
           <label>Address Two</label>
@@ -83,7 +83,7 @@ const CustomerUpdateForm = ({ customer, onClose, onUpdate  }) => {  // Accept cu
         {/* Contact Information */}
         <div className="form-group">
           <label>Official Email</label>
-          <input type="email" name="officialEmail" value={customerData.officialEmail} onChange={handleInputChange} required />
+          <input type="email" name="officialEmail" value={customerData.officialEmail} onChange={handleInputChange} />
         </div>
         <div className="form-group">
           <label>Landline One</label>
@@ -105,7 +105,7 @@ const CustomerUpdateForm = ({ customer, onClose, onUpdate  }) => {  // Accept cu
         {/* Tax Information */}
         <div className="form-group">
           <label>GST Number</label>
-          <input type="text" name="gstNo" value={customerData.gstNo} onChange={handleInputChange} required />
+          <input type="text" name="gstNo" value={customerData.gstNo} onChange={handleInputChange}  />
         </div>
         <div className="form-group">
           <label>PAN Number</label>

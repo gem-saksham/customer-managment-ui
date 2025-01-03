@@ -97,7 +97,7 @@ const CustomerSubjectForm = ({onClose}) => {
             name="subjectName"
             value={subjectData.subjectName}
             onChange={handleInputChange}
-            required style={{ padding: '10px', width: '100%', borderRadius: '5px' }}
+            style={{ padding: '10px', width: '100%', borderRadius: '5px' }}
           >
             <option value="">Select a Subject</option>
             {Object.keys(subjects).map((subject, index) => (
@@ -116,7 +116,6 @@ const CustomerSubjectForm = ({onClose}) => {
               name="subjectNameSubCategory"
               value={subjectData.subjectNameSubCategory}
               onChange={handleInputChange}
-              required
               style={{ padding: '10px', width: '100%', borderRadius: '5px' }}
             >
               <option value="">Select a Subcategory</option>
@@ -133,7 +132,6 @@ const CustomerSubjectForm = ({onClose}) => {
               value={subjectData.subjectNameSubCategory}
               onChange={handleInputChange}
               placeholder="Enter your own subcategory"
-              required
             />
           )}
         </div>

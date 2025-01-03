@@ -53,6 +53,19 @@ const CustomerContactForm = ({onClose}) => {
         setContactData({ ...contactData, [name]: value });
     };
 
+    const handlePhoneValidation = (e) => {
+        const value = e.target.value;
+
+        // Regex for validating phone numbers (10 digits)
+        const phoneRegex = /^[0-9]{10}$/;
+
+        if (value === "" || phoneRegex.test(value)) {
+            setError(""); // Clear error if valid
+        } else {
+            setError("Invalid phone number. Please enter exactly 10 digits.");
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true); // Set loading to true
@@ -147,7 +160,6 @@ const CustomerContactForm = ({onClose}) => {
                         name="firstName"
                         value={contactData.firstName}
                         onChange={handleInputChange}
-                        required
                     />
                 </div>
                 <div className="form-group">
@@ -166,7 +178,6 @@ const CustomerContactForm = ({onClose}) => {
                         name="lastName"
                         value={contactData.lastName}
                         onChange={handleInputChange}
-                        required
                     />
                 </div>
                 <div className="form-group">
@@ -212,7 +223,6 @@ const CustomerContactForm = ({onClose}) => {
             value={contactData.roleInput || ''} // Bind input value to a separate state
             onChange={(e) => setContactData({ ...contactData, roleInput: e.target.value })} // Update input value
             placeholder="Type your role"
-            required
             style={{ marginTop: '10px', padding: '10px', width: '100%', borderRadius: '5px' }}
         />
     )}
@@ -231,8 +241,7 @@ const CustomerContactForm = ({onClose}) => {
                         type="email"
                         name="emailAddressOne"
                         value={contactData.emailAddressOne}
-                        onChange={handleInputChange}
-                        required
+                        onChange={handleInputChange}                        
                     />
                 </div>
                 <div className="form-group">
@@ -250,27 +259,29 @@ const CustomerContactForm = ({onClose}) => {
                         type="email"
                         name="officialEmail"
                         value={contactData.officialEmail}
-                        onChange={handleInputChange}
-                        required
+                        onChange={handleInputChange}                        
                     />
                 </div>
                 <div className="form-group">
                     <label>Mobile One</label>
                     <input
-                        type="text"
+                        type="tel"
                         name="mobileOne"
                         value={contactData.mobileOne}
                         onChange={handleInputChange}
-                        required
+                        onBlur={handlePhoneValidation}
+                        placeholder="Please enter a valid 10-digit phone number."
                     />
                 </div>
                 <div className="form-group">
                     <label>Mobile Two</label>
                     <input
-                        type="text"
+                        type="tel"
                         name="mobileTwo"
                         value={contactData.mobileTwo}
                         onChange={handleInputChange}
+                        onBlur={handlePhoneValidation}
+                        placeholder="Please enter a valid 10-digit phone number."
                     />
                 </div>
                 <div className="form-group">

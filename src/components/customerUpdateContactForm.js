@@ -25,6 +25,20 @@ const CustomerContactUpdateForm = ({ contact, onClose, onUpdate }) => {
 
     fetchRoles();
 }, []);
+   
+const handlePhoneValidation = (e) => {
+  const value = e.target.value;
+
+  // Regex for validating phone numbers (10 digits)
+  const phoneRegex = /^[0-9]{10}$/;
+
+  if (value === "" || phoneRegex.test(value)) {
+      setError(""); // Clear error if valid
+  } else {
+      setError("Invalid phone number. Please enter exactly 10 digits.");
+  }
+};
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,7 +67,6 @@ const CustomerContactUpdateForm = ({ contact, onClose, onUpdate }) => {
         name="salutation"
         value={contactData.salutation}
         onChange={handleInputChange}
-        required
         style={{ padding: '10px', width: '100%', borderRadius: '5px' }}
     >
         <option value="">Select a salutation</option>
@@ -66,7 +79,7 @@ const CustomerContactUpdateForm = ({ contact, onClose, onUpdate }) => {
 </div>
         <div className="form-group">
           <label>First Name</label>
-          <input type="text" name="firstName" value={contactData.firstName} onChange={handleInputChange} required />
+          <input type="text" name="firstName" value={contactData.firstName} onChange={handleInputChange}  />
         </div>
         <div className="form-group">
           <label>Middle Name</label>
@@ -74,7 +87,7 @@ const CustomerContactUpdateForm = ({ contact, onClose, onUpdate }) => {
         </div>
         <div className="form-group">
           <label>Last Name</label>
-          <input type="text" name="lastName" value={contactData.lastName} onChange={handleInputChange} required />
+          <input type="text" name="lastName" value={contactData.lastName} onChange={handleInputChange}  />
         </div>
         <div className="form-group">
           <label>Designation</label>
@@ -114,14 +127,13 @@ const CustomerContactUpdateForm = ({ contact, onClose, onUpdate }) => {
             value={contactData.roleInput || ''} // Bind input value to a separate state
             onChange={(e) => setContactData({ ...contactData, roleInput: e.target.value })} // Update input value
             placeholder="Type your role"
-            required
             style={{ marginTop: '10px', padding: '10px', width: '100%', borderRadius: '5px' }}
         />
     )}
 </div>
         <div className="form-group">
           <label>Email Address 1</label>
-          <input type="email" name="emailAddressOne" value={contactData.emailAddressOne} onChange={handleInputChange} required />
+          <input type="email" name="emailAddressOne" value={contactData.emailAddressOne} onChange={handleInputChange}  />
         </div>
         <div className="form-group">
           <label>Email Address 2</label>
@@ -133,11 +145,13 @@ const CustomerContactUpdateForm = ({ contact, onClose, onUpdate }) => {
         </div>
         <div className="form-group">
           <label>Mobile Number 1</label>
-          <input type="text" name="mobileOne" value={contactData.mobileOne} onChange={handleInputChange} required />
+          <input type="tel" name="mobileOne" value={contactData.mobileOne} onChange={handleInputChange} onBlur={handlePhoneValidation}
+                        placeholder="Please enter a valid 10-digit phone number."  />
         </div>
         <div className="form-group">
           <label>Mobile Number 2</label>
-          <input type="text" name="mobileTwo" value={contactData.mobileTwo} onChange={handleInputChange} />
+          <input type="tel" name="mobileTwo" value={contactData.mobileTwo} onChange={handleInputChange} onBlur={handlePhoneValidation}
+                        placeholder="Please enter a valid 10-digit phone number." />
         </div>
         <div className="form-group">
           <label>Skype ID</label>
